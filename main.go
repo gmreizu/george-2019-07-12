@@ -1,21 +1,54 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"net/http"
 
 	"go.reizu.org/servemux"
 )
 
-func handler(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("Welcome!\n"))
+// Document represents a document store on the server.
+type Document struct {
+	Name string `json:"name,omitempty"`
+	Size int    `json:"size,omitempty"`
+}
+
+type handler struct {
+}
+
+func (h *handler) getDocuments(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	docs := []Document{
+		Document{"Doc1", 100},
+		Document{"Doc2", 200},
+	}
+	b, _ := json.Marshal(docs)
+	w.Write(b)
+}
+
+func (h *handler) postDocument(w http.ResponseWriter, r *http.Request) {
+}
+
+func (h *handler) deleteDocument(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
+	h := &handler{}
 	mux := servemux.New()
 
-	mux.HandleFunc("/api/v1/documents", handler)
 	mux.Handle("/app/*", http.StripPrefix("/app/", http.FileServer(http.Dir("./web/app/public"))))
+
+	mux.HandleFunc("/api/v1/documents", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodGet:
+			h.getDocuments(w, r)
+		case http.MethodDelete:
+			h.deleteDocument(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
 
 	// TODO: harden the http server!
 	log.Fatal(http.ListenAndServe(":3000", mux))

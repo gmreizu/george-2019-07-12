@@ -1,8 +1,6 @@
 import { Document } from "./document";
 
-export enum APIClientEvent {
-    GetDocuments = "apiClient/getDocuments"
-}
+export const GetDocumentsEvent = "apiClient/getDocuments"
 
 interface DocumentRecord {
     name: string
@@ -24,11 +22,6 @@ export class APIClient {
         }
 
         return records.map(record => new Document(record.name, record.size))
-
-        // return [
-        //     new Document("Doc1", 300),
-        //     new Document("Doc2", 400),
-        // ]
     }
 
     public uploadDocument = (document: Document) => {

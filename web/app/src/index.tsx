@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { APIClient, APIClientEvent } from './api-client';
+import { APIClient, GetDocumentsEvent } from './api-client';
 import { Broker } from './broker';
 import { App } from './components/app';
 import { MainContext } from './context';
 import { DocumentStore } from './document-store';
 import './index.scss';
 import * as serviceWorker from './serviceWorker';
-
 
 async function main() {
     const broker = new Broker()
@@ -16,7 +15,7 @@ async function main() {
     const documentStore = new DocumentStore(broker)
 
     const documents = await apiClient.getDocuments()
-    broker.publish(APIClientEvent.GetDocuments, documents)
+    broker.publish(GetDocumentsEvent, documents)
 
     const context = {
         broker,

@@ -1,5 +1,7 @@
 import { Document } from "./document";
 
+export const apiBaseURL = "http://localhost:3000/api"
+
 export const GetDocumentsEvent = "apiClient/getDocuments"
 
 interface DocumentRecord {
@@ -9,12 +11,10 @@ interface DocumentRecord {
 
 /** APIClient provides an interface to the service API. */
 export class APIClient {
-    public baseURL = "http://localhost:3000/api/v1"
-
     public getDocuments = async (query: string = ""): Promise<Document[]> => {
         const records = await this.http<DocumentRecord[]>(
             "GET",
-            `${this.baseURL}/documents`
+            `${apiBaseURL}/v1/documents`
         )
 
         if (!records) {

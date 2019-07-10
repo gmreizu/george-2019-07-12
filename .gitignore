@@ -5,3 +5,5 @@ node_modules/
 /hometask
 /web/app-old/
 /web/app/build/
+/web/uploads/*.jpg
+/web/uploads/*.png

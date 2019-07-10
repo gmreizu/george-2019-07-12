@@ -5,13 +5,13 @@ import (
 	"net/http"
 
 	"playground/hometask/internal/app/hometask"
-	"playground/hometask/internal/pkg/cors"
+	"playground/hometask/pkg/cors"
 
 	"go.reizu.org/servemux"
 )
 
 func main() {
-	h := &hometask.Handler{}
+	h := hometask.NewHandler()
 	mux := servemux.New()
 
 	mux.Handle("/app/*", http.StripPrefix("/app/", http.FileServer(http.Dir("./web/app/build"))))
@@ -23,6 +23,8 @@ func main() {
 		switch r.Method {
 		case http.MethodGet:
 			h.GetDocuments(w, r)
+		case http.MethodPost:
+			h.PostDocument(w, r)
 		case http.MethodDelete:
 			h.DeleteDocument(w, r)
 		default:

@@ -3,6 +3,7 @@ import { apiBaseURL } from "../api-client";
 import { MainContext } from "../context";
 import "./app.scss";
 import { DocumentGrid } from "./document-grid";
+import { ImageUploadForm } from "./image-upload-form";
 import { Modal } from "./modal";
 
 const uploadURL = `${apiBaseURL}/v1/documents`
@@ -36,19 +37,13 @@ export class App extends React.Component {
                             </header>
                             <Modal
                                 open={isUploadModalOpen}
-                                onClose={this.uploadModalDidClose}>
-                                <form
-                                    encType="multipart/form-data"
-                                    action={uploadURL}
-                                    method="post"
-                                >
-                                    <p>
-                                        <input type="file" name="docfile" accept={accept} />
-                                    </p>
-                                    <p>
-                                        <input type="submit" value="Upload" />
-                                    </p>
-                                </form>
+                                onClose={this.uploadModalDidClose}
+                            >
+                                <ImageUploadForm
+                                    uploadURL={uploadURL}
+                                    accept={accept}
+                                    onUploadEnd={this.uploadDidEnd}
+                                />
                             </Modal>
                             <DocumentGrid documents={documentStore.getAll()} />
                         </div>
@@ -65,6 +60,12 @@ export class App extends React.Component {
     }
 
     private uploadModalDidClose = () => {
+        this.setState({
+            isUploadModalOpen: false,
+        })
+    }
+
+    private uploadDidEnd = () => {
         this.setState({
             isUploadModalOpen: false,
         })

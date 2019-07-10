@@ -2,6 +2,9 @@ import * as React from "react";
 import { DocumentStore } from "../document-store";
 import "./app.scss";
 import { DocumentGrid } from "./document-grid";
+import { ImageUpload } from "./image-upload";
+
+const uploadURL = "http://localhost:3000/api/v1/documents"
 
 export class App extends React.Component {
     public render = (): JSX.Element => {
@@ -17,6 +20,7 @@ export class App extends React.Component {
                     />
                     <button>Upload</button>
                 </header>
+                <ImageUpload url={uploadURL} />
                 <DocumentGrid documents={documentStore.getAll()} />
             </div>
         )

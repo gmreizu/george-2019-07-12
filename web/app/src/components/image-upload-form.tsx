@@ -1,5 +1,4 @@
 import * as React from "react";
-import "./image-upload.scss";
 
 interface Props {
     readonly method?: string

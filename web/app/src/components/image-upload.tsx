@@ -3,7 +3,7 @@ import "./image-upload.scss";
 
 interface Props {
     readonly method?: string
-    readonly url?: string
+    readonly url: string
     readonly accept?: string
     readonly onUpload?: (file: File) => void
 }
@@ -28,7 +28,7 @@ export class ImageUpload extends React.Component<Props, State> {
             <form className="image-upload" onSubmit={this.didSubmit}>
                 {
                     previewURL &&
-                    <img className="image-upload__preview" src={previewURL} />
+                    <img className="image-upload__preview" src={previewURL} alt="Upload preview" />
                 }
                 <input required type="file" onChange={this.fileDidChange} accept={accept} />
                 <button type="submit">Upload</button>
@@ -51,7 +51,7 @@ export class ImageUpload extends React.Component<Props, State> {
     }
 
     private didSubmit = async () => {
-        const { file } = this.state
+        const file = this.state.file as File
 
         if (this.props.onUpload) {
             this.props.onUpload(file)

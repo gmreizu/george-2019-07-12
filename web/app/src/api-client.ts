@@ -4,20 +4,31 @@ export enum APIClientEvent {
     GetDocuments = "apiClient/getDocuments"
 }
 
+interface DocumentRecord {
+    name: string
+    size: number
+}
+
 /** APIClient provides an interface to the service API. */
 export class APIClient {
     public baseURL = "http://localhost:3000/api/v1"
 
-    public getDocuments = async (query: string = null): Promise<Document[]> => {
-        // return this.http<Document[]>(
-        //     "GET",
-        //     `${this.baseURL}/documents`
-        // )
+    public getDocuments = async (query: string = ""): Promise<Document[]> => {
+        const records = await this.http<DocumentRecord[]>(
+            "GET",
+            `${this.baseURL}/documents`
+        )
 
-        return [
-            new Document("Doc1", 300),
-            new Document("Doc2", 400),
-        ]
+        if (!records) {
+            return []
+        }
+
+        return records.map(record => new Document(record.name, record.size))
+
+        // return [
+        //     new Document("Doc1", 300),
+        //     new Document("Doc2", 400),
+        // ]
     }
 
     public uploadDocument = (document: Document) => {
@@ -26,7 +37,7 @@ export class APIClient {
     public deleteDocument = (name: string) => {
     }
 
-    private http = async <T>(method: string, url: string, body?: unknown): Promise<T> => {
+    private http = async <T>(method: string, url: string, body?: unknown): Promise<T | null> => {
         let init: RequestInit
 
         if (body instanceof File) {
@@ -61,5 +72,7 @@ export class APIClient {
         } catch (e) {
             console.error(e)
         }
+
+        return null
     }
 }

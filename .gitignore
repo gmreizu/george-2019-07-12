@@ -3,3 +3,5 @@ node_modules/
 
 /web/app/dist/
 /hometask
+/web/app-old/
+/web/app/build/

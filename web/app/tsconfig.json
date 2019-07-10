@@ -1,16 +1,30 @@
 {
     "compilerOptions": {
-        "module": "es6",
-        "noImplicitAny": true,
-        "outDir": "./public",
-        "target": "es6",
-        "jsx": "react",
+        "target": "es5",
+        "lib": [
+            "dom",
+            "dom.iterable",
+            "esnext"
+        ],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "module": "esnext",
+        "moduleResolution": "node",
+        "resolveJsonModule": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "preserve"
     },
     "include": [
-        "src/**/*"
-    ],
-    "exclude": [
-        "node_modules",
-        "**/*.test.ts"
+        "src",
+        "../app-old/src/components",
+        "../app-old/src/document.ts",
+        "../app-old/src/document-store.ts",
+        "../app-old/src/context.ts",
+        "../app-old/src/broker.ts"
     ]
 }

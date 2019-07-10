@@ -22,6 +22,7 @@ func (h *handler) getDocuments(w http.ResponseWriter, r *http.Request) {
 	docs := []Document{
 		Document{"Doc1", 100},
 		Document{"Doc2", 200},
+		Document{"Doc3", 321},
 	}
 	b, _ := json.Marshal(docs)
 	w.Write(b)
@@ -37,7 +38,8 @@ func main() {
 	h := &handler{}
 	mux := servemux.New()
 
-	mux.Handle("/app/*", http.StripPrefix("/app/", http.FileServer(http.Dir("./web/app/public"))))
+	mux.Handle("/app/*", http.StripPrefix("/app/", http.FileServer(http.Dir("./web/app/build"))))
+	mux.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir("./web/app/build/static"))))
 
 	mux.HandleFunc("/api/v1/documents", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {

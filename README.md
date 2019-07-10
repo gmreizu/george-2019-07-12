@@ -26,6 +26,12 @@ Upload a new document to the service.
 
 Remove a document from the service
 
+## Running tests
+
+```sh
+go test ./...
+```
+
 ## Miscellanea
 
 For Git commit messages, we follow Golang Team's conventions as described here:

@@ -6,11 +6,8 @@ interface Props {
     readonly document: Document
 }
 
-interface State {
-}
-
 /** DocumentCard presents a document as a card. */
-export class DocumentCard extends React.PureComponent<Props, State> {
+export class DocumentCard extends React.PureComponent<Props> {
     public render = (): JSX.Element => {
         const { document } = this.props
 

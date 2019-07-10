@@ -7,11 +7,8 @@ interface Props {
     readonly documents: Document[]
 }
 
-interface State {
-}
-
 /** DocumentGrid presents a collection of Documents in a grid layout. */
-export class DocumentGrid extends React.Component<Props, State> {
+export class DocumentGrid extends React.Component<Props> {
     public render = (): JSX.Element => {
         const { documents } = this.props
 

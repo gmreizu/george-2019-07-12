@@ -40,6 +40,8 @@ For Git commit messages, we follow Golang Team's conventions as described here:
 
 <https://golang.org/doc/contribute.html#commit_messages>
 
+A 'monorepo' aproach is used, where both the API service and the front-end Web app are organized in a single-repo, mainly for simplicity. The two code-bases can be separated at a later stage, if needed.
+
 ### CSS
 
 We use the [BEM methodology](https://en.bem.info/) for CSS styles, mostly to disable the 'cascading' feature of CSS, which is considered an anti-pattern these days.

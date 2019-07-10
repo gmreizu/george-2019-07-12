@@ -1,9 +1,12 @@
 import * as React from "react";
+import { DocumentStore } from "../document-store";
 import "./app.scss";
 import { DocumentGrid } from "./document-grid";
 
 export class App extends React.Component {
     public render = (): JSX.Element => {
+        const documentStore = new DocumentStore()
+
         return (
             <div className="app">
                 <header className="app__header">
@@ -14,7 +17,7 @@ export class App extends React.Component {
                     />
                     <button>Upload</button>
                 </header>
-                <DocumentGrid />
+                <DocumentGrid documents={documentStore.getAll()} />
             </div>
         )
     }

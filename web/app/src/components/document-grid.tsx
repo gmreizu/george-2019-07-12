@@ -5,6 +5,7 @@ export class DocumentGrid extends React.Component {
     public render = (): JSX.Element => {
         return (
             <div className="document-grid">
+                DocumentGrid
             </div>
         )
     }

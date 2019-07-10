@@ -1,0 +1,12 @@
+.app {
+}
+
+.app__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 48px;
+}
+
+.app__header__searchbox {
+    max-width: 400px;
+}

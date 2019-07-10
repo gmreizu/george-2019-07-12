@@ -1,12 +1,21 @@
+import { APIClientEvent } from "./api-client";
+import { Broker } from "./broker";
 import { Document } from "./document";
 
 export class DocumentStore {
-    private documents: Document[] = [
-        new Document("Doc1", 300),
-        new Document("Doc2", 400),
-    ]
+    constructor(
+        public broker: Broker,
+    ) {
+        broker.subscribe(APIClientEvent.GetDocuments, this.handleGetDocuments)
+    }
+
+    private documents: Document[] = []
 
     public getAll = (): Document[] => {
         return this.documents
+    }
+
+    private handleGetDocuments = (documents: Document[]) => {
+        this.documents = documents
     }
 }

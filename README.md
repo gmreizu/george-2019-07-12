@@ -12,4 +12,9 @@
 
 ### GET /resources
 
-## Other notes
+## Miscellanea
+
+For Git commit messages, we follow Golang Team's conventions as described here:
+
+<https://golang.org/doc/contribute.html#commit_messages>
+

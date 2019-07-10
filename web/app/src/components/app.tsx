@@ -3,11 +3,22 @@ import { apiBaseURL } from "../api-client";
 import { MainContext } from "../context";
 import "./app.scss";
 import { DocumentGrid } from "./document-grid";
+import { Modal } from "./modal";
 
 const uploadURL = `${apiBaseURL}/v1/documents`
 
+interface State {
+    isUploadModalOpen?: boolean
+}
+
 export class App extends React.Component {
+    public state = {
+        isUploadModalOpen: false
+    }
+
     public render = (): JSX.Element => {
+        const { isUploadModalOpen } = this.state
+
         return (
             <MainContext.Consumer>
                 {(context) => {
@@ -21,21 +32,41 @@ export class App extends React.Component {
                                     type="text"
                                     placeholder="Search documents..."
                                 />
-                                <button>Upload</button>
+                                <button onClick={this.openUploadModalDidClick}>Upload</button>
                             </header>
-                            <form
-                                encType="multipart/form-data"
-                                action={uploadURL}
-                                method="post"
-                            >
-                                <input type="file" name="docfile" accept={accept} />
-                                <input type="submit" value="upload file" />
-                            </form>
+                            <Modal
+                                open={isUploadModalOpen}
+                                onClose={this.uploadModalDidClose}>
+                                <form
+                                    encType="multipart/form-data"
+                                    action={uploadURL}
+                                    method="post"
+                                >
+                                    <p>
+                                        <input type="file" name="docfile" accept={accept} />
+                                    </p>
+                                    <p>
+                                        <input type="submit" value="Upload" />
+                                    </p>
+                                </form>
+                            </Modal>
                             <DocumentGrid documents={documentStore.getAll()} />
                         </div>
                     )
                 }}
             </MainContext.Consumer>
         )
+    }
+
+    private openUploadModalDidClick = () => {
+        this.setState({
+            isUploadModalOpen: true,
+        })
+    }
+
+    private uploadModalDidClose = () => {
+        this.setState({
+            isUploadModalOpen: false,
+        })
     }
 }

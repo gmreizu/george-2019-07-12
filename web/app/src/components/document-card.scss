@@ -1,4 +1,18 @@
+$padding: 24px;
+
 .document-card {
     border: 1px solid #ccc;
-    padding: 24px;
+    padding: $padding;
+    position: relative;
+
+    h3 {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.document-card__delete {
+    position: absolute;
+    bottom: $padding;
+    right: $padding;
 }

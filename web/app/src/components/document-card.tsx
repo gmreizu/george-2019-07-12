@@ -13,10 +13,16 @@ export class DocumentCard extends React.PureComponent<Props> {
 
         return (
             <div className="document-card">
-                <div>{document.name}</div>
+                <h3>{document.name}</h3>
                 <div>{document.size}</div>
-                <button>Delete</button>
+                <button className="document-card__delete" onClick={this.deleteDidClick}>Delete</button>
             </div>
         )
+    }
+
+    private deleteDidClick = () => {
+        if (window.confirm("Are you sure you want to delete this Document?")) {
+            console.log("DELETE")
+        }
     }
 }

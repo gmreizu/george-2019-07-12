@@ -1,6 +1,8 @@
 # George - 11/07/2019
 
-This repository contains the front-end and the back-end for a simple Document Uploading Web application.
+This repository contains the front-end and the back-end for a simple Document Uploading Web application. 
+
+While the backend actually stores uploaded documents on disk, it keeps document metadata in an in-memory database that is reset every time the server restarts.
 
 ## Installation
 
@@ -82,11 +84,17 @@ We depend on React's automatic escaping of interpolated strings, to mitigate XSS
 
 On the backend, we explicitly verify that the uploaded documents are actually `PNG` or `JPEG` files. We also restrict the file-size to 10MiB.
 
+We avoid using the default HTTP server offered in the Go stdlib. We instantiate a properly configured HTTP server.
+
 ## Improvements
 
+* Store the uploaded documents on 'blobstore', e.g. S3, Google Cloud Storage etc.
+* Store the document metadata in a Relational Database (e.g. Postgres) or a Document Store (e.g. Firestore)
 * Support pagination in the document grid (offset, limit)
 * More refactored CSS
 * Additional hardening of the backend
+  * Request throtling.
+* Add extensive logging and monitoring both at the backend and frontend.
 
 ## Libraries
 

@@ -15,6 +15,65 @@ Then, you can run the included build script to install further dependencies and 
 ./scripts/build.sh
 ```
 
+### Development mode execution
+
+To run the application in *development mode*, open two terminals. In the first terminal give the following command:
+
+```sh
+go run cmd/backend/main.go
+```
+
+This starts the backend server that serves the API endpoints and the document files.
+
+In the second terminal give:
+
+```sh
+cd web/app
+npm run start
+```
+
+This starts a development server that serves the frontend Web application at http://localhost:3001
+
+### Production mode execution
+
+To run the application in *production mode*, open two terminals. In the first terminal give the following command:
+
+```sh
+cd cmd/backend
+go build
+./backend
+```
+
+This starts the backend server that serves the API endpoints and the document files.
+
+In the second terminal give:
+
+```sh
+pushd web/app
+npm run build
+popd
+cd cmd/frontend
+go build
+./frontend
+```
+
+This starts a server that serves the frontend Web application at http://localhost:3001
+
+### Running the tests
+
+For the back-end:
+
+```sh
+go test ./...
+```
+
+For the front-end:
+
+```sh
+cd web/app
+npm run test
+```
+
 ## Security
 
 For security reasons we try to minimize external dependencies.
@@ -163,21 +222,6 @@ Connection: close
 {
   "error": "document not found"
 }
-```
-
-## Running tests
-
-For the back-end:
-
-```sh
-go test ./...
-```
-
-For the front-end:
-
-```sh
-cd web/app
-npm run test
 ```
 
 ## Miscellanea

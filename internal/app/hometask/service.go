@@ -18,15 +18,6 @@ import (
 // MaxUploadBytesNum is the maximum size of uploads in bytes.
 const MaxUploadBytesNum = 10 << 20 // 10MiB
 
-// Document represents a document store on the server.
-type Document struct {
-	ID    string    `json:"id,omitempty"`
-	Title string    `json:"title,omitempty"`
-	Size  int64     `json:"size,omitempty"`
-	Path  string    `json:"path,omitempty"`
-	Time  time.Time `json:"time,omitempty"`
-}
-
 var db = newDatabase()
 
 var (

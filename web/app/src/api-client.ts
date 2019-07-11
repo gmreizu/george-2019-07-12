@@ -5,7 +5,7 @@ export const apiBaseURL = "http://localhost:3000/api"
 export const GetDocumentsEvent = "apiClient/getDocuments"
 
 interface DocumentRecord {
-    name: string
+    title: string
     size: number
 }
 
@@ -21,7 +21,7 @@ export class APIClient {
             return []
         }
 
-        return records.map(record => new Document(record.name, record.size))
+        return records.map(record => new Document(record.title, record.size))
     }
 
     public uploadDocument = (document: Document) => {

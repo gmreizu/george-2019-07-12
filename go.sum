@@ -1,2 +1,4 @@
+github.com/matoous/go-nanoid v0.0.0-20190515092250-e998f83de84d h1:SZ/jkfEtIP9zCGc+UvWc5+B74ZfY0Apv8+Mih1piI8M=
+github.com/matoous/go-nanoid v0.0.0-20190515092250-e998f83de84d/go.mod h1:tCkpafETJHheK6lwruIaDWj0UoZKeHO0C2Gin8bbock=
 go.reizu.org/servemux v0.2.2 h1:gvtETBPJ1apDBie2sQbdnVeWWnXFTrsJPCtZYJmjAp8=
 go.reizu.org/servemux v0.2.2/go.mod h1:WhHU1hAIu/KPU7bIr0y8JAZjj3V1bG1OkLsTp79ffrQ=

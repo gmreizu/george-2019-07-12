@@ -17,7 +17,7 @@ export class DocumentCard extends React.PureComponent<Props> {
 
         return (
             <div className="document-card">
-                <h3>{document.name}</h3>
+                <h3>{document.title}</h3>
                 <div>{document.size}</div>
                 <button className="document-card__delete" onClick={this.deleteDidClick}>Delete</button>
             </div>

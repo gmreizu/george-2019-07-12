@@ -21,22 +21,15 @@ func NewHandler() *Handler {
 // GetDocuments returns the documents stored on the server.
 func (h *Handler) GetDocuments(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	docs := []Document{
-		Document{"Doc1", 100},
-		Document{"Doc2", 200},
-		Document{"Doc3", 321},
-		Document{"Doc3", 321},
-		Document{"Doc3", 321},
-		Document{"Doc3", 321},
-		Document{"Doc3", 321},
-	}
-	b, _ := json.Marshal(docs)
+	b, _ := json.Marshal(db.all())
 	w.Write(b)
 }
 
 // PostDocument uploads a new document to the server.
 func (h *Handler) PostDocument(w http.ResponseWriter, r *http.Request) {
 	r.ParseMultipartForm(MaxUploadBytesNum)
+
+	title := r.FormValue("title")
 
 	file, fh, err := r.FormFile("docfile")
 	if err != nil {
@@ -45,7 +38,7 @@ func (h *Handler) PostDocument(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ctx := r.Context()
-	docURL, err := h.service.UploadDocument(ctx, file, fh)
+	docURL, err := h.service.UploadDocument(ctx, title, file, fh)
 	if err != nil {
 		transportutil.Respond(w, err, codeFrom(err))
 		return

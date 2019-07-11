@@ -9,6 +9,7 @@ interface Props {
 }
 
 export class ImageUploadForm extends React.Component<Props> {
+    private titleInputRef = React.createRef<HTMLInputElement>()
     private fileInputRef = React.createRef<HTMLInputElement>()
 
     public render = (): JSX.Element => {
@@ -26,7 +27,7 @@ export class ImageUploadForm extends React.Component<Props> {
                 <h1>Upload a document</h1>
                 <p>
                     <label>Document Title</label>
-                    <input type="text" name="title" />
+                    <input type="text" name="title" ref={this.titleInputRef} />
                 </p>
                 <p>
                     <label>Document File</label>
@@ -45,9 +46,12 @@ export class ImageUploadForm extends React.Component<Props> {
         const { uploadURL } = this.props
 
         const formData = new FormData()
-        const fileInput = this.fileInputRef.current!
+
         // @ts-ignore
-        formData.append("docfile", fileInput.files[0])
+        formData.append("title", this.titleInputRef.current!.value)
+
+        // @ts-ignore
+        formData.append("docfile", this.fileInputRef.current!.files[0])
 
         await fetch(uploadURL, {
             method: "POST",

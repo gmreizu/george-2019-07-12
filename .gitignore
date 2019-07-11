@@ -1,9 +1,9 @@
 node_modules/
 .rpt2_cache/
 
-/web/app/dist/
 /hometask
-/web/app-old/
+/cmd/backend/backend
+/cmd/frontend/frontend
 /web/app/build/
 /web/uploads/*.jpg
 /web/uploads/*.png

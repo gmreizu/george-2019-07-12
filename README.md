@@ -201,3 +201,8 @@ A 'monorepo' aproach is used, where both the API service and the front-end Web a
 ### CSS
 
 We use the [BEM methodology](https://en.bem.info/) for CSS styles, mostly to disable the 'cascading' feature of CSS, which is considered an anti-pattern these days.
+
+### Why use broker instead of Redux/MobX.
+
+In previous projects I used a custom flux-style state manager based on [RxJS](https://github.com/ReactiveX/rxjs). It wasn't easy to switch to Redux within the time constrains, so I implemented a simple pub-sub `broker` that in coordination with the `DocumentStore` implement the 'unidirectional flow' pattern advocated by Flux/Redux etc. IMO, it's a simple, easy to understand solution, that's apropriate for this exercise.
+

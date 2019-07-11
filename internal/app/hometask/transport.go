@@ -96,6 +96,8 @@ func codeFrom(err error) int {
 	switch err {
 	case ErrNotFound:
 		return http.StatusNotFound
+	case ErrInvalidTitle, ErrInvalidDoc, ErrUnsupportedDocFormat:
+		return http.StatusUnprocessableEntity
 	}
 	return http.StatusInternalServerError
 }

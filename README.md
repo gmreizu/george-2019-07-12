@@ -188,6 +188,27 @@ Date: Thu, 11 Jul 2019 12:56:20 GMT
 }
 ```
 
+On failure returns an error message, for example:
+
+```
+Request URL: http://localhost:3000/api/v1/documents
+Request Method: POST
+Status Code: 422 Unprocessable Entity
+Remote Address: [::1]:3000
+Referrer Policy: no-referrer-when-downgrade
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Pragma, Cache-Control, Authorization
+Access-Control-Allow-Methods: HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS
+Access-Control-Allow-Origin: http://localhost:3001
+Content-Length: 35
+Content-Type: application/json; charset=utf-8
+Date: Thu, 11 Jul 2019 18:31:49 GMT
+
+{
+    "error": "invalid document title"
+}
+```
+
 ### DELETE /api/v1/documents?id={id}
 
 Remove the document with the specific id from the service.
@@ -206,7 +227,7 @@ Date: Thu, 11 Jul 2019 13:06:26 GMT
 {}
 ```
 
-On error returns an error message, for example:
+On failure returns an error message, for example:
 
 ```
 HTTP/1.1 404 Not Found

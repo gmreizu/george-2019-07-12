@@ -23,6 +23,8 @@ var db = newDatabase()
 var (
 	// ErrNotFound denotes that the document was not found.
 	ErrNotFound = errors.New("document not found")
+	// ErrInvalidTitle denotes that the document title is invalid.
+	ErrInvalidTitle = errors.New("invalid document title")
 	// ErrInvalidDoc denotes an invalid document that is exceeding the max bytes
 	// or an unsupported image format.
 	ErrInvalidDoc = errors.New("invalid document")
@@ -50,6 +52,12 @@ func (s *service) GetDocuments(ctx context.Context, q string) ([]*Document, erro
 
 func (s *service) UploadDocument(ctx context.Context, title string, file multipart.File, fh *multipart.FileHeader) (*Document, error) {
 	defer file.Close()
+
+	tlen := len(title)
+
+	if tlen < 4 || tlen > 32 {
+		return nil, ErrInvalidTitle
+	}
 
 	lr := io.LimitReader(file, MaxUploadBytesNum)
 	img, format, err := image.Decode(lr)

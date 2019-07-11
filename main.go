@@ -6,17 +6,15 @@ import (
 
 	"playground/hometask/internal/app/hometask"
 	"playground/hometask/pkg/cors"
-
-	"go.reizu.org/servemux"
 )
 
 func main() {
 	h := hometask.NewHandler()
-	mux := servemux.New()
+	mux := http.NewServeMux()
 
-	mux.Handle("/app/*", http.StripPrefix("/app/", http.FileServer(http.Dir("./web/app/build"))))
-	mux.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir("./web/app/build/static"))))
-	mux.Handle("/uploads/*", http.StripPrefix("/uploads/", http.FileServer(http.Dir("./web/uploads"))))
+	// mux.Handle("/app/*", http.StripPrefix("/app/", http.FileServer(http.Dir("./web/app/build"))))
+	// mux.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir("./web/app/build/static"))))
+	// mux.Handle("/uploads/*", http.StripPrefix("/uploads/", http.FileServer(http.Dir("./web/uploads"))))
 
 	corsMiddleware := cors.New("http://localhost:3001/")
 

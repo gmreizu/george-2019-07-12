@@ -46,6 +46,7 @@ export class App extends React.PureComponent<{}, State> {
                         className="app__header__searchbox"
                         type="text"
                         placeholder="Search documents..."
+                        autoFocus={true}
                     />
                     <button className="app__upload-button" onClick={this.openUploadModalDidClick}>Upload</button>
                 </header>

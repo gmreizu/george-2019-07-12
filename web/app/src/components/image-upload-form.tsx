@@ -31,7 +31,7 @@ export class ImageUploadForm extends React.Component<Props> {
                 <h1>Upload a document</h1>
                 <p>
                     <label>Document Title</label>
-                    <input type="text" name="title" ref={this.titleInputRef} />
+                    <input type="text" name="title" ref={this.titleInputRef} autoFocus={true} />
                 </p>
                 <p>
                     <label>Document File</label>

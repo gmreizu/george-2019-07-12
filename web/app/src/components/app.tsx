@@ -11,6 +11,7 @@ interface State {
     documents?: Document[]
 }
 
+/** App is the root component of the application. */
 export class App extends React.Component<{}, State> {
     static contextType = MainContext
 

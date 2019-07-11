@@ -5,6 +5,7 @@ export const apiBaseURL = `${backendBaseURL}/api`
 
 export const GetDocumentsEvent = "apiClient/getDocuments"
 
+/** DocumentRecord is the 'wire' representation of a Document. */
 interface DocumentRecord {
     id: string
     title: string

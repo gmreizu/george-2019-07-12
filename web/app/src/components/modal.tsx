@@ -6,6 +6,7 @@ interface Props {
     readonly onClose: () => void
 }
 
+/** Modal presents some content as a modal dialog. */
 export class Modal extends React.Component<Props> {
     public render = (): JSX.Element | null => {
         const { open, children } = this.props

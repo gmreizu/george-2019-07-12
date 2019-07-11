@@ -6,6 +6,7 @@ export const AddDocumentAction = "DocumentStore/AddDocumentAction"
 export const DeleteDocumentAction = "DocumentStore/DeleteDocumentAction"
 export const DocumentStoreUpdatedEvent = "DocumentStore/DocumentStoreUpdatedEvent"
 
+/** DocumentStore manages the state of the documents collection. */
 export class DocumentStore {
     constructor(
         public broker: Broker,

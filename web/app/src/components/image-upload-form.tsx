@@ -11,6 +11,7 @@ interface Props {
 
 const titleRE = "^[^<>]+$"
 
+/** ImageUploadForm manages the document upload workflow. */
 export class ImageUploadForm extends React.Component<Props> {
     static contextType = MainContext
 

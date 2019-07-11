@@ -9,6 +9,7 @@ interface State {
     isUploadModalOpen?: boolean
 }
 
+/** AppHeader presents the application header. */
 export class AppHeader extends React.PureComponent<{}, State> {
     static contextType = MainContext
 

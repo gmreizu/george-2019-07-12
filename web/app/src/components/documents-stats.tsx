@@ -7,6 +7,7 @@ interface Props {
     readonly documents: Document[]
 }
 
+/** DocumentsStats presents aggregated statistics about the documents collection. */
 export const DocumentsStats: React.SFC<Props> = (props: Props): JSX.Element => {
     const { documents } = props
 

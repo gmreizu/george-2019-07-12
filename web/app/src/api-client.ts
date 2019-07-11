@@ -18,7 +18,7 @@ export class APIClient {
     public getDocuments = async (query: string = ""): Promise<Document[]> => {
         const records = await this.http<DocumentRecord[]>(
             "GET",
-            `${apiBaseURL}/v1/documents`
+            `${apiBaseURL}/v1/documents${query === "" ? "" : `?q=${query}`}`
         )
 
         if (!records) {

@@ -31,6 +31,10 @@ export class DocumentStore {
         return this.documents
     }
 
+    private clear = () => {
+        this.documents = []
+    }
+
     private handleAddDocumentAction = (document: Document) => {
         this.add(document)
         this.broker.publish(DocumentStoreUpdatedEvent, this)
@@ -43,6 +47,7 @@ export class DocumentStore {
     }
 
     private handleGetDocumentsEvent = (documents: Document[]) => {
+        this.clear()
         for (const document of documents) {
             this.add(document)
         }

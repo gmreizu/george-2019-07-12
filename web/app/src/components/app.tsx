@@ -1,5 +1,5 @@
 import * as React from "react";
-import { apiBaseURL } from "../api-client";
+import { apiBaseURL, GetDocumentsEvent } from "../api-client";
 import { MainContext } from "../context";
 import { Document } from "../document";
 import { DocumentStore, DocumentStoreUpdatedEvent } from "../document-store";
@@ -47,6 +47,7 @@ export class App extends React.PureComponent<{}, State> {
                         type="text"
                         placeholder="Search documents..."
                         autoFocus={true}
+                        onChange={this.searchBoxDidChange}
                     />
                     <button className="app__upload-button" onClick={this.openUploadModalDidClick}>Upload</button>
                 </header>
@@ -85,6 +86,14 @@ export class App extends React.PureComponent<{}, State> {
 
         const { broker } = this.context
         broker.publish()
+    }
+
+    private searchBoxDidChange = async (e: React.ChangeEvent) => {
+        const el = e.target as HTMLInputElement
+        const query = el.value
+        const { broker, apiClient } = this.context
+        const documents = await apiClient.getDocuments(query)
+        broker.publish(GetDocumentsEvent, documents)
     }
 
     private handleDocumentStoreUpdatedEvent = (documentStore: DocumentStore) => {

@@ -30,7 +30,7 @@ var (
 
 // Service implements the document management logic.
 type Service interface {
-	GetDocuments(ctx context.Context) (docs []*Document, err error)
+	GetDocuments(ctx context.Context, q string) (docs []*Document, err error)
 	UploadDocument(ctx context.Context, title string, file multipart.File, fh *multipart.FileHeader) (doc *Document, err error)
 	DeleteDocument(ctx context.Context, id string) (err error)
 }
@@ -38,16 +38,16 @@ type Service interface {
 type service struct {
 }
 
-func (s *service) GetDocuments(ctx context.Context) ([]*Document, error) {
-	return db.all(), nil
+func (s *service) GetDocuments(ctx context.Context, q string) ([]*Document, error) {
+	if q == "" {
+		return db.all(), nil
+	}
+
+	return db.search(q), nil
 }
 
 func (s *service) UploadDocument(ctx context.Context, title string, file multipart.File, fh *multipart.FileHeader) (*Document, error) {
 	defer file.Close()
-
-	// fmt.Printf("Uploaded File: %+v\n", fh.Filename)
-	// fmt.Printf("File Size: %+v\n", fh.Size)
-	// fmt.Printf("MIME Header: %+v\n", fh.Header)
 
 	lr := io.LimitReader(file, MaxUploadBytesNum)
 	img, format, err := image.Decode(lr)

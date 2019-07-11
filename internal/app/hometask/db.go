@@ -2,8 +2,9 @@ package hometask
 
 import (
 	"fmt"
-	"time"
 	"math/rand"
+	"strings"
+	"time"
 
 	nanoid "github.com/matoous/go-nanoid"
 )
@@ -34,6 +35,18 @@ func (d *database) all() []*Document {
 	return values
 }
 
+func (d *database) search(q string) []*Document {
+	values := make([]*Document, 0, len(d.docs))
+	q = strings.ToLower(q)
+	for _, v := range d.docs {
+		if strings.Contains(strings.ToLower(v.Title), q) {
+			values = append(values, v)
+		}
+	}
+
+	return values
+}
+
 // seed populates the db with some dummy documents.
 func (d *database) seed(n int) {
 	for i := 0; i < n; i++ {
@@ -41,7 +54,7 @@ func (d *database) seed(n int) {
 		time.Sleep(1 * time.Millisecond)
 		d.insert(NewDocument(
 			id,
-			fmt.Sprintf("Doc %d", i + 1),
+			fmt.Sprintf("Doc %d", i+1),
 			"uploads/dummy.jpg",
 			int64(rand.Intn(100000)),
 		))

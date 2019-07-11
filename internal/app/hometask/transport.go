@@ -20,8 +20,10 @@ func NewHandler() *Handler {
 
 // GetDocuments returns the documents stored on the server.
 func (h *Handler) GetDocuments(w http.ResponseWriter, r *http.Request) {
+	q := r.URL.Query().Get("q")
+
 	ctx := r.Context()
-	docs, err := h.service.GetDocuments(ctx)
+	docs, err := h.service.GetDocuments(ctx, q)
 	if err != nil {
 		transportutil.Respond(w, err, codeFrom(err))
 		return

@@ -28,7 +28,9 @@ For security reasons we try to minimize external dependencies.
 
 ### Back-end
 
-No external libraries are used.
+We use one external dependency:
+
+* `go-nanoid`: A tiny, secure, URL-friendly, unique string ID generator.   
 
 ### Front-end
 
@@ -36,9 +38,9 @@ The only libraries used in production are `react` and `react-dom`.
 
 Development-only dependencies include:
 
-* TypeScript: Static-typing catches many bugs and allows for superior development ergonomics (IDEs), and more readable and maintainable code.
+* `typescript`: Static-typing catches many bugs and allows for superior development ergonomics (IDEs), and more readable and maintainable code.
 
-* react-scripts: Easy boostrapping of a React applications that follow best-practices.
+* `react-scripts`: Easy boostrapping of a React applications that follow best-practices.
 
 ## API
 

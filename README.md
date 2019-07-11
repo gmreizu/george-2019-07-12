@@ -95,6 +95,8 @@ We avoid using the default HTTP server offered in the Go stdlib. We instantiate 
 * Additional hardening of the backend
   * Request throtling.
 * Add extensive logging and monitoring both at the backend and frontend.
+* Add a Dockerfile
+* Use Snapshot Testing with Jest.
 
 ## Libraries
 

@@ -1,9 +1,0 @@
-# API examples
-
-## Get all documents
-
-GET http://localhost:3000/api/v1/documents
-
-## Delete document with invalid id
-
-DELETE http://localhost:3000/api/v1/documents?id="jAixzQFnL331vWgV2ipFnQ"

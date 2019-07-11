@@ -32,8 +32,8 @@ var (
 )
 
 var (
-	db  = newDatabase()
-	tre = regexp.MustCompile("^[^<>]+$")
+	db             = newDatabase()
+	reInvalidTitle = regexp.MustCompile("^[^<>]+$")
 )
 
 // Service implements the document management logic.
@@ -63,7 +63,7 @@ func (s *service) UploadDocument(ctx context.Context, title string, file multipa
 		return nil, ErrInvalidTitle
 	}
 
-	if !tre.MatchString(title) {
+	if !reInvalidTitle.MatchString(title) {
 		return nil, ErrInvalidTitle
 	}
 

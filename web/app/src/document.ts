@@ -7,8 +7,8 @@ export class Document {
     constructor(
         public id: string,
         public title: string,
-        public size: number,
         public path: string,
+        public size: number,
         public time: Date = new Date(),
     ) {
     }

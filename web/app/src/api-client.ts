@@ -8,8 +8,8 @@ export const GetDocumentsEvent = "apiClient/getDocuments"
 interface DocumentRecord {
     id: string
     title: string
-    size: number
     path: string
+    size: number
     time: string
 }
 
@@ -96,5 +96,5 @@ export class APIClient {
 }
 
 const unmarshalDocument = (record: DocumentRecord): Document => {
-    return new Document(record.id, record.title, record.size, record.path, new Date(record.time))
+    return new Document(record.id, record.title, record.path, record.size, new Date(record.time))
 }

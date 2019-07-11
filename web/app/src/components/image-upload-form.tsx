@@ -10,6 +10,8 @@ interface Props {
     readonly onUploadEnd: () => void
 }
 
+const titleRE = "^[^<>]+$"
+
 export class ImageUploadForm extends React.Component<Props> {
     static contextType = MainContext
 
@@ -31,11 +33,26 @@ export class ImageUploadForm extends React.Component<Props> {
                 <h1>Upload a document</h1>
                 <p>
                     <label>Document Title</label>
-                    <input type="text" name="title" ref={this.titleInputRef} autoFocus={true} />
+                    <input
+                        type="text"
+                        name="title"
+                        required
+                        minLength={4}
+                        maxLength={32}
+                        pattern={titleRE}
+                        autoFocus
+                        ref={this.titleInputRef}
+                    />
                 </p>
                 <p>
                     <label>Document File</label>
-                    <input type="file" name="docfile" accept={accept} ref={this.fileInputRef} />
+                    <input
+                        type="file"
+                        name="docfile"
+                        accept={accept}
+                        required
+                        ref={this.fileInputRef}
+                    />
                 </p>
                 <p className="image-upload-form__actions">
                     <button type="submit">Upload</button>
@@ -47,15 +64,16 @@ export class ImageUploadForm extends React.Component<Props> {
     private didSubmit = async (e: any) => {
         e.preventDefault()
 
-        // const { uploadURL } = this.props
-
         const formData = new FormData()
 
         // @ts-ignore
-        formData.append("title", this.titleInputRef.current!.value)
+        const title = this.titleInputRef.current!.value
 
         // @ts-ignore
-        formData.append("docfile", this.fileInputRef.current!.files[0])
+        const docfile = this.fileInputRef.current!.files[0]
+
+        formData.append("title", title)
+        formData.append("docfile", docfile)
 
         const { broker, apiClient } = this.context
 

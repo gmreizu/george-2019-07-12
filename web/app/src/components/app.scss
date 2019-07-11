@@ -17,3 +17,17 @@
 .app__upload-button {
     text-transform: uppercase;
 }
+
+@media (max-width: 480px) {
+    .app__header {
+        flex-direction: column-reverse;
+    }
+
+    .app__header__searchbox {
+        width: auto;
+    }
+    
+    .app__upload-button {
+        margin-bottom: 24px;
+    }    
+}

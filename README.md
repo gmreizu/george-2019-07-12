@@ -1,5 +1,7 @@
 # George - 11/07/2019
 
+
+
 ## Installation
 
 To run this application you need to have `nodejs 10.16` and `Go 1.12` installed on your system. For installation instructions please check here:
@@ -15,17 +17,28 @@ Then, you can run the included build script to install further dependencies and 
 
 ## Security
 
+For security reasons we try to minimize external dependencies.
+
 ## Improvements
 
 * Support pagination in the document grid (offset, limit)
+* More refactored CSS
 
 ## Libraries
 
 ### Back-end
 
-* Nanoid
+No external libraries are used.
 
 ### Front-end
+
+The only libraries used in production are `react` and `react-dom`.
+
+Development-only dependencies include:
+
+* TypeScript: Static-typing catches many bugs and allows for superior development ergonomics (IDEs), and more readable and maintainable code.
+
+* react-scripts: Easy boostrapping of a React applications that follow best-practices.
 
 ## API
 

@@ -38,13 +38,13 @@ func (h *Handler) PostDocument(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ctx := r.Context()
-	docURL, err := h.service.UploadDocument(ctx, title, file, fh)
+	doc, err := h.service.UploadDocument(ctx, title, file, fh)
 	if err != nil {
 		transportutil.Respond(w, err, codeFrom(err))
 		return
 	}
 
-	transportutil.Respond(w, map[string]string{"documentURL": docURL}, http.StatusOK)
+	transportutil.Respond(w, map[string]interface{}{"document": doc}, http.StatusOK)
 }
 
 // DeleteDocument deletes a document from the server.

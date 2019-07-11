@@ -33,6 +33,10 @@ func (d *database) all() []*Document {
 func (d *database) seed(n int) {
 	for i := 0; i < n; i++ {
 		id, _ := nanoid.Nanoid()
-		d.insert(&Document{id, fmt.Sprintf("Dummy%d", i), rand.Intn(100000)})
+		d.insert(&Document{
+			ID:    id,
+			Title: fmt.Sprintf("Dummy%d", i),
+			Size:  int64(rand.Intn(100000)),
+		})
 	}
 }

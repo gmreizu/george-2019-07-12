@@ -11,7 +11,7 @@ interface State {
     documents?: Document[]
 }
 
-export class App extends React.PureComponent<{}, State> {
+export class App extends React.Component<{}, State> {
     static contextType = MainContext
 
     public state = {

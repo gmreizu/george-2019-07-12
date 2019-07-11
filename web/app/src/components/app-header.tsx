@@ -60,9 +60,6 @@ export class AppHeader extends React.PureComponent<{}, State> {
         this.setState({
             isUploadModalOpen: false,
         })
-
-        const { broker } = this.context
-        broker.publish()
     }
 
     private searchBoxDidChange = async (e: React.ChangeEvent) => {

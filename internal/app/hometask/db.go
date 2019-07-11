@@ -2,6 +2,7 @@ package hometask
 
 import (
 	"fmt"
+	"time"
 	"math/rand"
 
 	nanoid "github.com/matoous/go-nanoid"
@@ -37,10 +38,12 @@ func (d *database) all() []*Document {
 func (d *database) seed(n int) {
 	for i := 0; i < n; i++ {
 		id, _ := nanoid.Nanoid()
-		d.insert(&Document{
-			ID:    id,
-			Title: fmt.Sprintf("Dummy%d", i),
-			Size:  int64(rand.Intn(100000)),
-		})
+		time.Sleep(1 * time.Millisecond)
+		d.insert(NewDocument(
+			id,
+			fmt.Sprintf("Doc %d", i + 1),
+			"uploads/dummy.jpg",
+			int64(rand.Intn(100000)),
+		))
 	}
 }

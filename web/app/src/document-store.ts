@@ -20,6 +20,7 @@ export class DocumentStore {
 
     private add = (document: Document) => {
         this.documents.push(document)
+        this.documents = this.documents.sort(Document.compareByTime) // TODO: temp
     }
 
     private remove = (id: string) => {

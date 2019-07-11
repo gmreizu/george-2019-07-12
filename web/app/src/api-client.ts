@@ -9,6 +9,7 @@ interface DocumentRecord {
     title: string
     size: number
     path: string
+    time: string
 }
 
 /** APIClient provides an interface to the service API. */
@@ -94,5 +95,5 @@ export class APIClient {
 }
 
 const unmarshalDocument = (record: DocumentRecord): Document => {
-    return new Document(record.id, record.title, record.size, record.path)
+    return new Document(record.id, record.title, record.size, record.path, new Date(record.time))
 }

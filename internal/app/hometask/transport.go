@@ -7,23 +7,40 @@ import (
 	"playground/hometask/pkg/transportutil"
 )
 
-// Handler handles requests to the API endpoints.
-type Handler struct {
+// Transport handles requests to the API endpoints.
+type Transport struct {
 	service Service
 }
 
-// NewHandler returns a new handler.
-func NewHandler() *Handler {
+func newTransport() *Transport {
 	svc := &service{}
-	return &Handler{svc}
+	return &Transport{svc}
+}
+
+// MakeHandler returns a new http.Handler that handles the API endpoints.
+func MakeHandler() http.Handler {
+	t := newTransport()
+
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodGet:
+			t.GetDocuments(w, r)
+		case http.MethodPost:
+			t.PostDocument(w, r)
+		case http.MethodDelete:
+			t.DeleteDocument(w, r)
+		default:
+			http.NotFound(w, r)
+		}
+	})
 }
 
 // GetDocuments returns the documents stored on the server.
-func (h *Handler) GetDocuments(w http.ResponseWriter, r *http.Request) {
+func (t *Transport) GetDocuments(w http.ResponseWriter, r *http.Request) {
 	q := r.URL.Query().Get("q")
 
 	ctx := r.Context()
-	docs, err := h.service.GetDocuments(ctx, q)
+	docs, err := t.service.GetDocuments(ctx, q)
 	if err != nil {
 		transportutil.Respond(w, err, codeFrom(err))
 		return
@@ -33,7 +50,7 @@ func (h *Handler) GetDocuments(w http.ResponseWriter, r *http.Request) {
 }
 
 // PostDocument uploads a new document to the server.
-func (h *Handler) PostDocument(w http.ResponseWriter, r *http.Request) {
+func (t *Transport) PostDocument(w http.ResponseWriter, r *http.Request) {
 	r.ParseMultipartForm(MaxUploadBytesNum)
 
 	title := r.FormValue("title")
@@ -45,7 +62,7 @@ func (h *Handler) PostDocument(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ctx := r.Context()
-	doc, err := h.service.UploadDocument(ctx, title, file, fh)
+	doc, err := t.service.UploadDocument(ctx, title, file, fh)
 	if err != nil {
 		transportutil.Respond(w, err, codeFrom(err))
 		return
@@ -55,7 +72,7 @@ func (h *Handler) PostDocument(w http.ResponseWriter, r *http.Request) {
 }
 
 // DeleteDocument deletes a document from the server.
-func (h *Handler) DeleteDocument(w http.ResponseWriter, r *http.Request) {
+func (t *Transport) DeleteDocument(w http.ResponseWriter, r *http.Request) {
 	q := r.URL.Query()
 
 	id := q.Get("id")
@@ -66,7 +83,7 @@ func (h *Handler) DeleteDocument(w http.ResponseWriter, r *http.Request) {
 	}
 
 	ctx := r.Context()
-	err := h.service.DeleteDocument(ctx, id)
+	err := t.service.DeleteDocument(ctx, id)
 	if err != nil {
 		transportutil.Respond(w, err, codeFrom(err))
 		return

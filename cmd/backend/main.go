@@ -11,25 +11,13 @@ import (
 )
 
 func main() {
-	h := hometask.NewHandler()
 	mux := http.NewServeMux()
 
 	mux.Handle("/uploads/", http.StripPrefix("/uploads/", http.FileServer(http.Dir("./web/uploads"))))
 
 	corsMiddleware := cors.New("http://localhost:3001/")
 
-	mux.Handle("/api/v1/documents", corsMiddleware(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		switch r.Method {
-		case http.MethodGet:
-			h.GetDocuments(w, r)
-		case http.MethodPost:
-			h.PostDocument(w, r)
-		case http.MethodDelete:
-			h.DeleteDocument(w, r)
-		default:
-			http.NotFound(w, r)
-		}
-	})))
+	mux.Handle("/api/v1/documents", corsMiddleware(hometask.MakeHandler()))
 
 	port := "3000"
 

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { backendBaseURL } from "../api-client";
 import { MainContext } from "../context";
 import { Document } from "../document";
 import { DeleteDocumentAction } from "../document-store";
@@ -19,7 +20,7 @@ export class DocumentCard extends React.PureComponent<Props> {
 
         return (
             <div className="document-card">
-                <h3>{document.title}</h3>
+                <h3><a href={`${backendBaseURL}${document.path}`}>{document.title}</a></h3>
                 <div>{formatBytes(document.size)}</div>
                 <button className="document-card__delete" onClick={this.deleteDidClick}>Delete</button>
             </div>

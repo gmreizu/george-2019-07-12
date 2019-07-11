@@ -1,6 +1,7 @@
 import { Document } from "./document";
 
-export const apiBaseURL = "http://localhost:3000/api"
+export const backendBaseURL = "http://localhost:3000"
+export const apiBaseURL = `${backendBaseURL}/api`
 
 export const GetDocumentsEvent = "apiClient/getDocuments"
 

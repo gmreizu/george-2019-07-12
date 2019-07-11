@@ -16,6 +16,7 @@ func main() {
 
 	mux.Handle("/app/*", http.StripPrefix("/app/", http.FileServer(http.Dir("./web/app/build"))))
 	mux.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir("./web/app/build/static"))))
+	mux.Handle("/uploads/*", http.StripPrefix("/uploads/", http.FileServer(http.Dir("./web/uploads"))))
 
 	corsMiddleware := cors.New("http://localhost:3001/")
 

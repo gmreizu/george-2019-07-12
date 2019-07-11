@@ -2,11 +2,13 @@ import * as React from "react";
 import { MainContext } from "../context";
 import { Document } from "../document";
 import { DeleteDocumentAction } from "../document-store";
+import { formatBytes } from "../util";
 import "./document-card.scss";
 
 interface Props {
     readonly document: Document
 }
+
 
 /** DocumentCard presents a document as a card. */
 export class DocumentCard extends React.PureComponent<Props> {
@@ -18,7 +20,7 @@ export class DocumentCard extends React.PureComponent<Props> {
         return (
             <div className="document-card">
                 <h3>{document.title}</h3>
-                <div>{document.size}</div>
+                <div>{formatBytes(document.size)}</div>
                 <button className="document-card__delete" onClick={this.deleteDidClick}>Delete</button>
             </div>
         )

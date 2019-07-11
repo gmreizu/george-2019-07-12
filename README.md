@@ -2,6 +2,17 @@
 
 ## Installation
 
+To run this application you need to have `nodejs 10.16` and `Go 1.12` installed on your system. For installation instructions please check here:
+
+* [Nodejs](https://nodejs.org/en/download/)
+* [Go](https://golang.org/doc/install)
+
+Then, you can run the included build script to install further dependencies and build the front-end and the back-end.
+
+```sh
+./scripts/build.sh
+```
+
 ## Security
 
 ## Improvements

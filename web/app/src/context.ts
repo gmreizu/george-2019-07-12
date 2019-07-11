@@ -3,10 +3,10 @@ import { APIClient } from "./api-client";
 import { Broker } from "./broker";
 import { DocumentStore } from "./document-store";
 
-interface ContextType {
+export interface MainContextType {
     broker: Broker
     apiClient: APIClient
     documentStore: DocumentStore
 }
 
-export const MainContext = React.createContext<ContextType>({} as ContextType)
+export const MainContext = React.createContext<MainContextType>({} as MainContextType)

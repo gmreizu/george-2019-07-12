@@ -5,7 +5,6 @@ import "./image-upload-form.scss";
 
 interface Props {
     readonly method?: string
-    readonly uploadURL: string
     readonly accept?: string
     readonly onUploadEnd: () => void
 }
@@ -19,14 +18,12 @@ export class ImageUploadForm extends React.Component<Props> {
     private fileInputRef = React.createRef<HTMLInputElement>()
 
     public render = (): JSX.Element => {
-        const { uploadURL } = this.props
         const accept = this.props.accept || "image/png, image/jpeg"
 
         return (
             <form
                 className="image-upload-form"
                 encType="multipart/form-data"
-                action={uploadURL}
                 method="post"
                 onSubmit={this.didSubmit}
             >

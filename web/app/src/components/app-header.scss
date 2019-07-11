@@ -1,0 +1,29 @@
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 48px;
+}
+
+.app-header__searchbox {
+    width: 300px;
+    padding: 0 8px;
+}
+
+.app__upload-button {
+    text-transform: uppercase;
+}
+
+@media (max-width: 480px) {
+    .app-header {
+        flex-direction: column-reverse;
+    }
+
+    .app-header__searchbox {
+        width: auto;
+    }
+    
+    .app__upload-button {
+        margin-bottom: 24px;
+    }    
+}

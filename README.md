@@ -6,6 +6,8 @@
 
 ## Improvements
 
+* Support pagination in the document grid (offset, limit)
+
 ## Libraries
 
 ### Back-end

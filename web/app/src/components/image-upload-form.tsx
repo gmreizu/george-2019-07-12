@@ -34,7 +34,7 @@ export class ImageUploadForm extends React.Component<Props> {
                     <input type="file" name="docfile" accept={accept} ref={this.fileInputRef} />
                 </p>
                 <p className="image-upload-form__actions">
-                    <input type="submit" value="Upload" />
+                    <button type="submit">Upload</button>
                 </p>
             </form>
         )

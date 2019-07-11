@@ -1,6 +1,6 @@
 # George - 11/07/2019
 
-
+This repository contains the front-end and the back-end for a simple Document Uploading Web application.
 
 ## Installation
 
@@ -19,10 +19,15 @@ Then, you can run the included build script to install further dependencies and 
 
 For security reasons we try to minimize external dependencies.
 
+We depend on React's automatic escaping of interpolated strings, to mitigate XSS attacks.
+
+On the backend, we explicitly verify that the uploaded documents are actually `PNG` or `JPEG` files. We also restrict the file-size to 10MiB.
+
 ## Improvements
 
 * Support pagination in the document grid (offset, limit)
 * More refactored CSS
+* Additional hardening of the backend
 
 ## Libraries
 

@@ -2,7 +2,8 @@ import * as React from "react";
 import { apiBaseURL } from "../api-client";
 import { MainContext } from "../context";
 import "./app.scss";
-import { DocumentGrid } from "./document-grid";
+import { DocumentsGrid } from "./documents-grid";
+import { DocumentsStats } from "./documents-stats";
 import { ImageUploadForm } from "./image-upload-form";
 import { Modal } from "./modal";
 
@@ -25,6 +26,7 @@ export class App extends React.Component {
                 {(context) => {
                     const { documentStore } = context
                     const accept = "image/png, image/jpeg"
+                    const documents = documentStore.getAll()
                     return (
                         <div className="app">
                             <header className="app__header">
@@ -45,7 +47,8 @@ export class App extends React.Component {
                                     onUploadEnd={this.uploadDidEnd}
                                 />
                             </Modal>
-                            <DocumentGrid documents={documentStore.getAll()} />
+                            <DocumentsStats documents={documents} />
+                            <DocumentsGrid documents={documents} />
                         </div>
                     )
                 }}

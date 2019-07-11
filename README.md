@@ -44,21 +44,101 @@ Development-only dependencies include:
 
 ## API
 
-### GET /api/v1/documents?q={query}&offset={offset}&limit={limit}
+### GET /api/v1/documents?q={query}
 
 Get a list of all documents stored on the service. This endpoint supports additional options passed as query-string parameters.
 
-* `q`: only return the documents that match the query value
-* `limit`: the maximum number of documents to return
-* `offset`: the number of documents to skip
+* `q`: only return the documents with a title matching the value of the `q` parameter.
+
+Returns a list of documents in JSON format, for example:
+
+```
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Pragma, Cache-Control, Authorization
+Access-Control-Allow-Methods: HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS
+Access-Control-Allow-Origin: http://localhost:3001
+Content-Type: application/json; charset=utf-8
+Date: Thu, 11 Jul 2019 12:52:35 GMT
+Content-Length: 1636
+Connection: close
+
+[
+  {
+    "id": "9n6a5hMzTKXJu6CCmdkjqj",
+    "title": "Doc 9",
+    "path": "uploads/dummy.jpg",
+    "size": 40456,
+    "time": "2019-07-11T15:43:20.870463653+03:00"
+  },
+  {
+    "id": "cqh2hEkW0OE8_zTL9dPfxD",
+    "title": "Doc 2",
+    "path": "uploads/dummy.jpg",
+    "size": 27887,
+    "time": "2019-07-11T15:43:20.862667244+03:00"
+  },
+  {
+    "id": "O0vvloodDNXUEr7u4VadOo",
+    "title": "George",
+    "path": "/uploads/O0vvloodDNXUEr7u4VadOo.jpg",
+    "size": 103134,
+    "time": "2019-07-11T15:43:33.342352653+03:00"
+  },
+]
+```
 
 ### POST /api/v1/documents
 
-Upload a new document to the service.
+Upload a new document to the service. This a `multipart/form-data` request, with two parameters:
 
-### DELETE /api/v1/documents/{id}
+* `title`: The document title
+* `docfile`: The file of the document
 
-Remove a document from the service
+```
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundaryoLNLjP3A7RoB87LD
+Origin: http://localhost:3001
+Referer: http://localhost:3001/
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.100 Safari/537.36
+```
+
+Returns the created document in JSON format, for example:
+
+```
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Pragma, Cache-Control, Authorization
+Access-Control-Allow-Methods: HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS
+Access-Control-Allow-Origin: http://localhost:3001
+Content-Length: 152
+Content-Type: application/json; charset=utf-8
+Date: Thu, 11 Jul 2019 12:56:20 GMT
+
+{
+    "id": "nEpzXkYE5_UxbERc4hkuNX",
+    "title": "Image",
+    "path": "/uploads/nEpzXkYE5_UxbERc4hkuNX.jpg",
+    "size": 103134,
+    "time": "2019-07-11T15:56:20.763232651+03:00"
+}
+```
+
+### DELETE /api/v1/documents?id={id}
+
+Remove the document with the specific id from the service.
+
+On success returns an empty response, for example:
+
+```
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Pragma, Cache-Control, Authorization
+Access-Control-Allow-Methods: HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS
+Access-Control-Allow-Origin: http://localhost:3001
+Content-Length: 3
+Content-Type: application/json; charset=utf-8
+Date: Thu, 11 Jul 2019 13:06:26 GMT
+
+{}
+```
 
 ## Running tests
 
@@ -77,9 +157,13 @@ npm run test
 
 ## Miscellanea
 
-### Code Style
+### Code Style and Code Layout
 
 We strive to use the 'official' code style of both languages used in the implementation. Please, note that Golang, promotes the use of small identifiers etc. For Golang we use the standard `gofmt` formatter. For TypeScript we use the VSCode formatter with minor tweaks (e.g. no semicolons).
+
+We use the directory structure described here:
+
+<https://github.com/golang-standards/project-layout>
 
 ### Git
 

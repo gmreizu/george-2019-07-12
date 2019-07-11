@@ -1,0 +1,5 @@
+# API examples
+
+GET http://localhost:3000/api/v1/documents
+
+DELETE http://localhost:3000/api/v1/documents?id="jAixzQFnLKv1vWgV1ipFnQ"

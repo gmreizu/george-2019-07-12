@@ -10,7 +10,6 @@ interface Props {
     readonly document: Document
 }
 
-
 /** DocumentCard presents a document as a card. */
 export class DocumentCard extends React.PureComponent<Props> {
     static contextType = MainContext

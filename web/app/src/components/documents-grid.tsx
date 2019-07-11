@@ -8,21 +8,19 @@ interface Props {
 }
 
 /** DocumentGrid presents a collection of Documents in a grid layout. */
-export class DocumentsGrid extends React.Component<Props> {
-    public render = (): JSX.Element => {
-        const { documents } = this.props
+export const DocumentsGrid: React.SFC<Props> = (props: Props): JSX.Element => {
+    const { documents } = props
 
-        return (
-            <div className="document-grid">
-                {documents.map((document, i) => {
-                    return (
-                        <DocumentCard
-                            key={i}
-                            document={document}
-                        />
-                    )
-                })}
-            </div>
-        )
-    }
+    return (
+        <div className="document-grid">
+            {documents.map((document, i) => {
+                return (
+                    <DocumentCard
+                        key={i}
+                        document={document}
+                    />
+                )
+            })}
+        </div>
+    )
 }

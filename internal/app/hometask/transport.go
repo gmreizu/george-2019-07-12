@@ -20,7 +20,14 @@ func NewHandler() *Handler {
 
 // GetDocuments returns the documents stored on the server.
 func (h *Handler) GetDocuments(w http.ResponseWriter, r *http.Request) {
-	transportutil.Respond(w, db.all(), http.StatusOK)
+	ctx := r.Context()
+	docs, err := h.service.GetDocuments(ctx)
+	if err != nil {
+		transportutil.Respond(w, err, codeFrom(err))
+		return
+	}
+
+	transportutil.Respond(w, docs, http.StatusOK)
 }
 
 // PostDocument uploads a new document to the server.

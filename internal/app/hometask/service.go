@@ -30,11 +30,16 @@ var (
 
 // Service implements the document management logic.
 type Service interface {
+	GetDocuments(ctx context.Context) (docs []*Document, err error)
 	UploadDocument(ctx context.Context, title string, file multipart.File, fh *multipart.FileHeader) (doc *Document, err error)
 	DeleteDocument(ctx context.Context, id string) (err error)
 }
 
 type service struct {
+}
+
+func (s *service) GetDocuments(ctx context.Context) ([]*Document, error) {
+	return db.all(), nil
 }
 
 func (s *service) UploadDocument(ctx context.Context, title string, file multipart.File, fh *multipart.FileHeader) (*Document, error) {

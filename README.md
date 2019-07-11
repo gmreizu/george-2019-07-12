@@ -8,6 +8,12 @@
 
 ## Libraries
 
+### Back-end
+
+* Nanoid
+
+### Front-end
+
 ## API
 
 ### GET /api/v1/documents?q={query}&offset={offset}&limit={limit}
@@ -45,7 +51,7 @@ npm run test
 
 ### Code Style
 
-We strive to use the 'official' code style of both languages used in the implementation. Please, note that Golang, promotes the use of small identifiers etc.
+We strive to use the 'official' code style of both languages used in the implementation. Please, note that Golang, promotes the use of small identifiers etc. For Golang we use the standard `gofmt` formatter. For TypeScript we use the VSCode formatter with minor tweaks (e.g. no semicolons).
 
 ### Git
 
@@ -58,5 +64,3 @@ A 'monorepo' aproach is used, where both the API service and the front-end Web a
 ### CSS
 
 We use the [BEM methodology](https://en.bem.info/) for CSS styles, mostly to disable the 'cascading' feature of CSS, which is considered an anti-pattern these days.
-
-

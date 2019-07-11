@@ -10,6 +10,7 @@ import (
 	"io"
 	"mime/multipart"
 	"os"
+	"regexp"
 	"time"
 
 	nanoid "github.com/matoous/go-nanoid"
@@ -17,8 +18,6 @@ import (
 
 // MaxUploadBytesNum is the maximum size of uploads in bytes.
 const MaxUploadBytesNum = 10 << 20 // 10MiB
-
-var db = newDatabase()
 
 var (
 	// ErrNotFound denotes that the document was not found.
@@ -30,6 +29,11 @@ var (
 	ErrInvalidDoc = errors.New("invalid document")
 	// ErrUnsupportedDocFormat denotes that the document has an unsupported image format.
 	ErrUnsupportedDocFormat = errors.New("unsupported document format")
+)
+
+var (
+	db  = newDatabase()
+	tre = regexp.MustCompile("^[^<>]+$")
 )
 
 // Service implements the document management logic.
@@ -56,6 +60,10 @@ func (s *service) UploadDocument(ctx context.Context, title string, file multipa
 	tlen := len(title)
 
 	if tlen < 4 || tlen > 32 {
+		return nil, ErrInvalidTitle
+	}
+
+	if !tre.MatchString(title) {
 		return nil, ErrInvalidTitle
 	}
 

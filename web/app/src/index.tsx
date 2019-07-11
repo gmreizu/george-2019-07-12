@@ -19,6 +19,7 @@ async function main() {
 
     const context = {
         broker,
+        apiClient,
         documentStore,
     }
 

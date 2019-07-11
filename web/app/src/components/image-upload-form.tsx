@@ -1,4 +1,6 @@
 import * as React from "react";
+import { MainContext } from "../context";
+import { AddDocumentAction } from "../document-store";
 import "./image-upload-form.scss";
 
 interface Props {
@@ -9,6 +11,8 @@ interface Props {
 }
 
 export class ImageUploadForm extends React.Component<Props> {
+    static contextType = MainContext
+
     private titleInputRef = React.createRef<HTMLInputElement>()
     private fileInputRef = React.createRef<HTMLInputElement>()
 
@@ -43,7 +47,7 @@ export class ImageUploadForm extends React.Component<Props> {
     private didSubmit = async (e: any) => {
         e.preventDefault()
 
-        const { uploadURL } = this.props
+        // const { uploadURL } = this.props
 
         const formData = new FormData()
 
@@ -53,10 +57,10 @@ export class ImageUploadForm extends React.Component<Props> {
         // @ts-ignore
         formData.append("docfile", this.fileInputRef.current!.files[0])
 
-        await fetch(uploadURL, {
-            method: "POST",
-            body: formData,
-        })
+        const { broker, apiClient } = this.context
+
+        const document = await apiClient.uploadDocument(formData)
+        broker.publish(AddDocumentAction, document)
 
         this.props.onUploadEnd()
     }

@@ -49,7 +49,7 @@ func (h *Handler) PostDocument(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	transportutil.Respond(w, map[string]interface{}{"document": doc}, http.StatusOK)
+	transportutil.Respond(w, doc, http.StatusOK)
 }
 
 // DeleteDocument deletes a document from the server.

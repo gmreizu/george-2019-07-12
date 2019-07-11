@@ -23,10 +23,27 @@ export class APIClient {
             return []
         }
 
-        return records.map(record => new Document(record.id, record.title, record.size, record.path))
+        return records.map(unmarshalDocument)
     }
 
-    public uploadDocument = (document: Document) => {
+    public uploadDocument = async (formData: FormData): Promise<Document | null> => {
+        try {
+            const res = await fetch(`${apiBaseURL}/v1/documents`, {
+                method: "POST",
+                body: formData,
+            })
+
+            if (res && res.ok) {
+                const record = await res.json() as DocumentRecord
+                return unmarshalDocument(record)
+            }
+
+            console.error(res)
+        } catch (e) {
+            console.error(e)
+        }
+
+        return null
     }
 
     public deleteDocument = async (id: string) => {
@@ -74,4 +91,8 @@ export class APIClient {
 
         return null
     }
+}
+
+const unmarshalDocument = (record: DocumentRecord): Document => {
+    return new Document(record.id, record.title, record.size, record.path)
 }

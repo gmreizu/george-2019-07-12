@@ -10,5 +10,10 @@
 }
 
 .app__header__searchbox {
-    max-width: 400px;
+    width: 300px;
+    padding: 0 8px;
+}
+
+.app__upload-button {
+    text-transform: uppercase;
 }

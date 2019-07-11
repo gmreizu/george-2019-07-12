@@ -35,7 +35,7 @@ export class App extends React.Component {
                                     type="text"
                                     placeholder="Search documents..."
                                 />
-                                <button onClick={this.openUploadModalDidClick}>Upload</button>
+                                <button className="app__upload-button" onClick={this.openUploadModalDidClick}>Upload</button>
                             </header>
                             <Modal
                                 open={isUploadModalOpen}

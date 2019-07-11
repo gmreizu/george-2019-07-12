@@ -40,6 +40,7 @@ var (
 // Service implements the document management logic.
 type Service interface {
 	UploadDocument(ctx context.Context, title string, file multipart.File, fh *multipart.FileHeader) (doc *Document, err error)
+	DeleteDocument(ctx context.Context, id string) (err error)
 }
 
 type service struct {
@@ -109,6 +110,11 @@ func (s *service) UploadDocument(ctx context.Context, title string, file multipa
 	db.insert(doc)
 
 	return doc, nil
+}
+
+func (s *service) DeleteDocument(ctx context.Context, id string) error {
+	db.delete(id)
+	return nil
 }
 
 func init() {

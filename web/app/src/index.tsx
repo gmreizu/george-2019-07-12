@@ -12,7 +12,7 @@ async function main() {
     const broker = new Broker()
     const apiClient = new APIClient()
 
-    const documentStore = new DocumentStore(broker)
+    const documentStore = new DocumentStore(broker, apiClient)
 
     const documents = await apiClient.getDocuments()
     broker.publish(GetDocumentsEvent, documents)

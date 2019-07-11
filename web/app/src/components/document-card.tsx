@@ -26,8 +26,9 @@ export class DocumentCard extends React.PureComponent<Props> {
 
     private deleteDidClick = () => {
         const { broker } = this.context
+        const { document } = this.props
         if (window.confirm("Are you sure you want to delete this Document?")) {
-            broker.publish(DeleteDocumentAction, "name")
+            broker.publish(DeleteDocumentAction, document.id)
         }
     }
 }

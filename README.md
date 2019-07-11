@@ -28,11 +28,24 @@ Remove a document from the service
 
 ## Running tests
 
+For the back-end:
+
 ```sh
 go test ./...
 ```
 
+For the front-end:
+
+```sh
+cd web/app
+npm run test
+```
+
 ## Miscellanea
+
+### Code Style
+
+We strive to use the 'official' code style of both languages used in the implementation. Please, note that Golang, promotes the use of small identifiers etc.
 
 ### Git
 

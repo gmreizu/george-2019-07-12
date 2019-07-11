@@ -5,8 +5,10 @@ export const apiBaseURL = "http://localhost:3000/api"
 export const GetDocumentsEvent = "apiClient/getDocuments"
 
 interface DocumentRecord {
+    id: string
     title: string
     size: number
+    path: string
 }
 
 /** APIClient provides an interface to the service API. */
@@ -21,13 +23,17 @@ export class APIClient {
             return []
         }
 
-        return records.map(record => new Document(record.title, record.size))
+        return records.map(record => new Document(record.id, record.title, record.size, record.path))
     }
 
     public uploadDocument = (document: Document) => {
     }
 
-    public deleteDocument = (name: string) => {
+    public deleteDocument = async (id: string) => {
+        await this.http<void>(
+            "DELETE",
+            `${apiBaseURL}/v1/documents?id=${id}`
+        )
     }
 
     private http = async <T>(method: string, url: string, body?: unknown): Promise<T | null> => {

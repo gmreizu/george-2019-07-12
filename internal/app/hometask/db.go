@@ -19,6 +19,10 @@ func (d *database) insert(doc *Document) {
 	d.docs[doc.ID] = doc
 }
 
+func (d *database) delete(id string) {
+	delete(d.docs, id)
+}
+
 func (d *database) all() []*Document {
 	values := make([]*Document, 0, len(d.docs))
 

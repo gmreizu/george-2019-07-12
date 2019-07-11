@@ -1,4 +1,4 @@
-import { GetDocumentsEvent } from "./api-client";
+import { APIClient, GetDocumentsEvent } from "./api-client";
 import { Broker } from "./broker";
 import { Document } from "./document";
 
@@ -7,6 +7,7 @@ export const DeleteDocumentAction = "documentStore/deleteDocument"
 export class DocumentStore {
     constructor(
         public broker: Broker,
+        public apiClient: APIClient,
     ) {
         broker.subscribe(DeleteDocumentAction, this.handleDeleteDocumentAction)
         broker.subscribe(GetDocumentsEvent, this.handleGetDocumentsEvent)
@@ -18,9 +19,8 @@ export class DocumentStore {
         return this.documents
     }
 
-    private handleDeleteDocumentAction = (name: string) => {
-        // TODO: implement me!
-        console.log(`DELETE DOCUMENT ${name}`)
+    private handleDeleteDocumentAction = (id: string) => {
+        this.apiClient.deleteDocument(id)
     }
 
     private handleGetDocumentsEvent = (documents: Document[]) => {

@@ -1,7 +1,7 @@
 package hometask
 
 import (
-	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"playground/hometask/pkg/transportutil"
@@ -20,9 +20,7 @@ func NewHandler() *Handler {
 
 // GetDocuments returns the documents stored on the server.
 func (h *Handler) GetDocuments(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	b, _ := json.Marshal(db.all())
-	w.Write(b)
+	transportutil.Respond(w, db.all(), http.StatusOK)
 }
 
 // PostDocument uploads a new document to the server.
@@ -49,6 +47,18 @@ func (h *Handler) PostDocument(w http.ResponseWriter, r *http.Request) {
 
 // DeleteDocument deletes a document from the server.
 func (h *Handler) DeleteDocument(w http.ResponseWriter, r *http.Request) {
+	q := r.URL.Query()
+
+	id := q.Get("id")
+	if id == "" {
+		err := fmt.Errorf("missing query parameter '%s'", "id")
+		transportutil.Respond(w, err, codeFrom(err))
+	}
+
+	ctx := r.Context()
+	h.service.DeleteDocument(ctx, id)
+
+	transportutil.Respond(w, map[string]interface{}{}, http.StatusOK)
 }
 
 func codeFrom(err error) int {

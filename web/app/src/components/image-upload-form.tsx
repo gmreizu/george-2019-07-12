@@ -72,6 +72,9 @@ export class ImageUploadForm extends React.Component<Props> {
         // @ts-ignore
         const docfile = this.fileInputRef.current!.files[0]
 
+        // Both are validated using HTML5 features.
+        // Additional validation is performed at the backend.
+
         formData.append("title", title)
         formData.append("docfile", docfile)
 

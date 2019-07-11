@@ -20,6 +20,9 @@ export class DocumentStore {
     private documents: Document[] = []
 
     private add = (document: Document) => {
+        if (!document) {
+            return
+        }
         this.documents.push(document)
         this.documents = this.documents.sort(Document.compareByTime) // TODO: temp
     }

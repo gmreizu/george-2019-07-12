@@ -36,12 +36,17 @@ export class APIClient {
                 body: formData,
             })
 
-            if (res && res.ok) {
-                const record = await res.json() as DocumentRecord
-                return unmarshalDocument(record)
+            if (!res) {
+                return null
             }
 
-            console.error(res)
+            const record = await res.json()
+
+            if (res.ok) {
+                return unmarshalDocument(record as DocumentRecord)
+            } else {
+                console.error(record["error"])
+            }
         } catch (e) {
             console.error(e)
         }
@@ -83,8 +88,15 @@ export class APIClient {
         try {
             const res = await fetch(request)
 
-            if (res && res.ok) {
+            if (!res) {
+                return null
+            }
+
+            if (res.ok) {
                 return res.json()
+            } else {
+                const record = await res.json()
+                console.error(record["error"])
             }
 
             console.error(res)

@@ -79,7 +79,9 @@ export class ImageUploadForm extends React.Component<Props> {
         const { broker, apiClient } = this.context
 
         const document = await apiClient.uploadDocument(formData)
-        broker.publish(AddDocumentAction, document)
+        if (document) {
+            broker.publish(AddDocumentAction, document)
+        }
 
         this.props.onUploadEnd()
     }

@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"playground/hometask/internal/app/hometask"
 	"playground/hometask/pkg/cors"
@@ -12,9 +14,7 @@ func main() {
 	h := hometask.NewHandler()
 	mux := http.NewServeMux()
 
-	// mux.Handle("/app/*", http.StripPrefix("/app/", http.FileServer(http.Dir("./web/app/build"))))
-	// mux.Handle("/static/*", http.StripPrefix("/static/", http.FileServer(http.Dir("./web/app/build/static"))))
-	// mux.Handle("/uploads/*", http.StripPrefix("/uploads/", http.FileServer(http.Dir("./web/uploads"))))
+	mux.Handle("/uploads/", http.StripPrefix("/uploads/", http.FileServer(http.Dir("./web/uploads"))))
 
 	corsMiddleware := cors.New("http://localhost:3001/")
 
@@ -31,6 +31,18 @@ func main() {
 		}
 	})))
 
-	// TODO: harden the http server!
-	log.Fatal(http.ListenAndServe(":3000", mux))
+	port := "3000"
+
+	s := &http.Server{
+		Addr:           ":" + port,
+		Handler:        mux,
+		ReadTimeout:    10 * time.Second,
+		WriteTimeout:   10 * time.Second,
+		IdleTimeout:    120 * time.Second,
+		MaxHeaderBytes: 1 << 20,
+	}
+
+	fmt.Println("Listening at :" + port)
+
+	log.Fatal(s.ListenAndServe())
 }

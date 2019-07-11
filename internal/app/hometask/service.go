@@ -21,6 +21,8 @@ const MaxUploadBytesNum = 10 << 20 // 10MiB
 var db = newDatabase()
 
 var (
+	// ErrNotFound denotes that the document was not found.
+	ErrNotFound = errors.New("document not found")
 	// ErrInvalidDoc denotes an invalid document that is exceeding the max bytes
 	// or an unsupported image format.
 	ErrInvalidDoc = errors.New("invalid document")
@@ -109,8 +111,7 @@ func (s *service) UploadDocument(ctx context.Context, title string, file multipa
 }
 
 func (s *service) DeleteDocument(ctx context.Context, id string) error {
-	db.delete(id)
-	return nil
+	return db.delete(id)
 }
 
 func init() {

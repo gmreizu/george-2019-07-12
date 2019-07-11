@@ -44,6 +44,8 @@ Development-only dependencies include:
 
 ## API
 
+The backend implements a simple REST API. On success, the corresponding resource are returned (encoded in JSON format). On failure, a JSON response containing an error description is returned instead. The Status Code of the response is set accordingly.
+
 ### GET /api/v1/documents?q={query}
 
 Get a list of all documents stored on the service. This endpoint supports additional options passed as query-string parameters.
@@ -138,6 +140,24 @@ Content-Type: application/json; charset=utf-8
 Date: Thu, 11 Jul 2019 13:06:26 GMT
 
 {}
+```
+
+On error returns an error message, for example:
+
+```
+HTTP/1.1 404 Not Found
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Headers: Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Pragma, Cache-Control, Authorization
+Access-Control-Allow-Methods: HEAD, GET, POST, PUT, PATCH, DELETE, OPTIONS
+Access-Control-Allow-Origin: http://localhost:3001
+Content-Type: application/json; charset=utf-8
+Date: Thu, 11 Jul 2019 13:16:51 GMT
+Content-Length: 31
+Connection: close
+
+{
+  "error": "document not found"
+}
 ```
 
 ## Running tests

@@ -62,14 +62,23 @@ func (h *Handler) DeleteDocument(w http.ResponseWriter, r *http.Request) {
 	if id == "" {
 		err := fmt.Errorf("missing query parameter '%s'", "id")
 		transportutil.Respond(w, err, codeFrom(err))
+		return
 	}
 
 	ctx := r.Context()
-	h.service.DeleteDocument(ctx, id)
+	err := h.service.DeleteDocument(ctx, id)
+	if err != nil {
+		transportutil.Respond(w, err, codeFrom(err))
+		return
+	}
 
 	transportutil.Respond(w, map[string]interface{}{}, http.StatusOK)
 }
 
 func codeFrom(err error) int {
+	switch err {
+	case ErrNotFound:
+		return http.StatusNotFound
+	}
 	return http.StatusInternalServerError
 }

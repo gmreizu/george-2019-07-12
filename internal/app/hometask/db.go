@@ -21,8 +21,14 @@ func (d *database) insert(doc *Document) {
 	d.docs[doc.ID] = doc
 }
 
-func (d *database) delete(id string) {
+func (d *database) delete(id string) error {
+	_, ok := d.docs[id]
+	if !ok {
+		return ErrNotFound
+	}
+
 	delete(d.docs, id)
+	return nil
 }
 
 func (d *database) all() []*Document {

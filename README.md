@@ -171,6 +171,11 @@ Connection: close
   },
 ]
 ```
+If there are no documents stored on the server it retuns an empty array response:
+
+```
+[]
+```
 
 ### POST /api/v1/documents
 

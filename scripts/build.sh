@@ -2,7 +2,9 @@
 
 # Build back-end.
 
+pushd cmd/backend
 go build
+popd
 
 # Build front-end.
 

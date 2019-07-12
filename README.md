@@ -1,4 +1,4 @@
-# George - 11/07/2019
+# George - 12/07/2019
 
 This repository contains the front-end and the back-end for a simple Document Uploading Web application. 
 
@@ -31,6 +31,7 @@ In the second terminal give:
 
 ```sh
 cd web/app
+npm i # only once
 npm run start
 ```
 
@@ -52,6 +53,7 @@ In the second terminal give:
 
 ```sh
 pushd web/app
+npm i # only once
 npm run build
 popd
 cd cmd/frontend
@@ -82,7 +84,7 @@ For security reasons we try to minimize external dependencies.
 
 We depend on React's automatic escaping of interpolated strings, to mitigate XSS attacks.
 
-On the backend, we explicitly verify that the uploaded documents are actually `PNG` or `JPEG` files. We also restrict the file-size to 10MiB.
+On the backend, we explicitly verify that the uploaded documents are actually `PNG` or `JPEG` files. We also restrict the file-size to 10MiB. Moreover, we validate that the documen title is valid.
 
 We avoid using the default HTTP server offered in the Go stdlib. We instantiate a properly configured HTTP server.
 
@@ -96,7 +98,7 @@ We avoid using the default HTTP server offered in the Go stdlib. We instantiate 
   * Request throtling.
 * Add extensive logging and monitoring both at the backend and frontend.
 * Add a Dockerfile
-* Use Snapshot Testing with Jest.
+* Use Snapshot Testing with Jest
 
 ## Libraries
 
@@ -280,4 +282,3 @@ We use the [BEM methodology](https://en.bem.info/) for CSS styles, mostly to dis
 ### Why use broker instead of Redux/MobX.
 
 In previous projects I used a custom flux-style state manager based on [RxJS](https://github.com/ReactiveX/rxjs). It wasn't easy to switch to Redux within the time constrains, so I implemented a simple pub-sub `broker` that in coordination with the `DocumentStore` implement the 'unidirectional flow' pattern advocated by Flux/Redux etc. IMO, it's a simple, easy to understand solution, that's apropriate for this exercise.
-

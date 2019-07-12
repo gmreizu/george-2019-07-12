@@ -1,5 +1,7 @@
 # George - 12/07/2019
 
+![Screeshot](hometask-screenshot.png)
+
 This repository contains the front-end and the back-end for a simple Document Uploading Web application. 
 
 While the backend actually stores uploaded documents on disk, it keeps document metadata in an in-memory database that is reset every time the server restarts.

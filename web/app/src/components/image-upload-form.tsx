@@ -28,7 +28,7 @@ export class ImageUploadForm extends React.Component<Props> {
                 method="post"
                 onSubmit={this.didSubmit}
             >
-                <h1>Upload a document</h1>
+                <h2>Upload a document</h2>
                 <p>
                     <label>Document Title</label>
                     <input

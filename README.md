@@ -94,17 +94,23 @@ We use a random id for the filename of the uploaded files, both to mitigate some
 
 We avoid using the default HTTP server offered in the Go stdlib. We instantiate a properly configured HTTP server.
 
+We use a CORS middleware to allow access to the API exclusively from the domain of the frontennd app.
+
 ## Improvements
+
+The deveopment process was quite contstrained on time. With additional time we would explore these posibilities:
 
 * Store the uploaded documents on 'blobstore', e.g. S3, Google Cloud Storage etc.
 * Store the document metadata in a Relational Database (e.g. Postgres) or a Document Store (e.g. Firestore)
 * Support pagination in the document grid (offset, limit)
 * More refactored CSS
-* Additional hardening of the backend
-  * Request throtling.
-* Add extensive logging and monitoring both at the backend and frontend.
 * Add a Dockerfile
+* Additional hardening of the backend
+  * Request rate-limits.
+  * Deployment to K8s (e.g. Google Cloud Run)
+  * Extensive logging and monitoring both at the backend and frontend.
 * Use Snapshot Testing with Jest
+* Improve the styling of the app, add icons, etc.
 
 ## Libraries
 

@@ -37,7 +37,7 @@ npm run start
 
 This starts a development server that serves the frontend Web application at http://localhost:3001
 
-### Production mode execution
+### Production mode build and execution
 
 To run the application in *production mode*, open two terminals. In the first terminal give the following command:
 

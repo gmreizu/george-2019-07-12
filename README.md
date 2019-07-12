@@ -4,6 +4,8 @@ This repository contains the front-end and the back-end for a simple Document Up
 
 While the backend actually stores uploaded documents on disk, it keeps document metadata in an in-memory database that is reset every time the server restarts.
 
+The uploaded images are stored in the directory `web/uploads`.
+
 ## Installation
 
 To run this application you need to have `nodejs 10.16` and `Go 1.12` installed on your system. For installation instructions please check here:
@@ -85,6 +87,8 @@ For security reasons we try to minimize external dependencies.
 We depend on React's automatic escaping of interpolated strings, to mitigate XSS attacks.
 
 On the backend, we explicitly verify that the uploaded documents are actually `PNG` or `JPEG` files. We also restrict the file-size to 10MiB. Moreover, we validate that the documen title is valid.
+
+We use a random id for the filename of the uploaded files, both to mitigate some attacks and make the files less discoverable.
 
 We avoid using the default HTTP server offered in the Go stdlib. We instantiate a properly configured HTTP server.
 
@@ -257,6 +261,12 @@ Connection: close
 }
 ```
 
+NOTE: A better API would be:
+
+`DELETE /api/v1/documents/{id}`
+
+but such urls are not supported by the default `Mux` included in Go's standard library and we wanted to avoid an external dependency.
+
 ## Miscellanea
 
 ### Code Style and Code Layout
@@ -266,6 +276,10 @@ We strive to use the 'official' code style of both languages used in the impleme
 We use the directory structure described here:
 
 <https://github.com/golang-standards/project-layout>
+
+The architecture of the backend, loosely follows ideas described here:
+
+<https://gokit.io/faq/#architecture-and-design>
 
 ### Git
 

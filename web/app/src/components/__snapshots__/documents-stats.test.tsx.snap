@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DocumentStats renders correctly 1`] = `
+<div
+  className="documents-stats"
+>
+  <h2>
+    2
+     
+    documents
+  </h2>
+  <div>
+    Total size: 
+    357 Bytes
+  </div>
+</div>
+`;

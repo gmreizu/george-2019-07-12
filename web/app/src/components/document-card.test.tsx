@@ -18,5 +18,5 @@ describe("DocumentCard", () => {
             .create(<DocumentCard document={document} />)
             .toJSON()
         expect(tree).toMatchSnapshot()
-    });
+    })
 })

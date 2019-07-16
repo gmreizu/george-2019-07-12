@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DocumentGrid renders correctly 1`] = `
+<div
+  className="document-grid"
+>
+  <div
+    className="document-card"
+  >
+    <h3>
+      <a
+        href="http://localhost:3000/uploads/doc1.jpg"
+        rel="noopener noreferrer"
+        target="_blank"
+        title="Doc 1"
+      >
+        Doc 1
+      </a>
+    </h3>
+    <div>
+      123 Bytes
+    </div>
+    <button
+      className="document-card__delete"
+      onClick={[Function]}
+    >
+      Delete
+    </button>
+  </div>
+  <div
+    className="document-card"
+  >
+    <h3>
+      <a
+        href="http://localhost:3000/uploads/doc1.jpg"
+        rel="noopener noreferrer"
+        target="_blank"
+        title="Doc 2"
+      >
+        Doc 2
+      </a>
+    </h3>
+    <div>
+      234 Bytes
+    </div>
+    <button
+      className="document-card__delete"
+      onClick={[Function]}
+    >
+      Delete
+    </button>
+  </div>
+</div>
+`;
